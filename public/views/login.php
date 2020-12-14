@@ -6,21 +6,21 @@
 <body>
     <div class="container">
         <div class="logo"> 
-            <img src="public/img/logo.svg"
+            <img src="public/img/logo.svg"/>
         </div>
         <div class="login-container">
-            <form class="login" action="login" method="POST">
+            <!--<form class="login" action="login" method="POST">
                 <div class="messages">
-                    <?php if(isset($messages)){
-                        foreach ($messages as $message){
-                            echo $message;
-                        }
-                    }
-                    ?>
+                    
                 </div>
                 <input name="email" type="text" placeholder="email@gmail.com">
                 <input name="password" type="password" placeholder="password">
                 <button type="submit">LOGIN</button>
+            </form>-->
+            <form>
+                <input name="email" type="text" placeholder="email@gmail.com">
+                <input name="password" type="password" placeholder="password">
+                <button>LOGIN</button>
             </form>
         </div>
     </div>
