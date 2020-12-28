@@ -40,7 +40,7 @@
                 add project
             </div>
         </header>
-        <section class="projects">
+        <section class="project-form">
             <h1>UPLOAD:</h1>
             <form action="addProject" method="POST" ENCTYPE="multipart/form-data">
                 <?php
