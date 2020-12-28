@@ -97,10 +97,10 @@
                     </div>
                 </div>
                 <div id="project1">
-                    <img src="public/img/uploads/xd^4.jpg">
+                    <img src="public/img/uploads/<? $project-getImage() ?>">
                     <div>
-                        <h2>Title</h2>
-                        <p>description</p>
+                        <h2><? $project-getTitle() ?></h2>
+                        <p><? $project-getDescription() ?></p>
                         <div class="social-section">
                             <i class="fas fa-heart">600</i>
                             <i class="fas fa-minus-square">2137</i>
