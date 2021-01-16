@@ -43,3 +43,7 @@ section.project-form {
     flex-direction: column;
 }
 
+.social-section > i:hover{
+    cursor: pointer;
+}
+
