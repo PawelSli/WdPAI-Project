@@ -27,4 +27,9 @@ class SlideshowController extends AppController
         $this->render('slideshow',['slides' => $slides]);
     }
 
+    public function add_article()
+    {
+        $this->render('add-article');
+    }
+
 }

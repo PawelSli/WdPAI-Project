@@ -14,6 +14,7 @@ Router::post('search', 'ProjectController');
 Router::get('like', 'ProjectController');
 Router::get('dislike', 'ProjectController');
 Router::get('slideshow', 'SlideshowController');
+Router::get('add-article', 'SlideshowController');
 
 
 
