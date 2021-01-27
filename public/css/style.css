@@ -1,5 +1,6 @@
 body{
     margin: 0;
+
 }
 
 .container {
@@ -47,7 +48,7 @@ button{
     line-height: 2.5em;
 }
 
-input,textarea{
+input,textarea,select,h2,h3{
     padding: 1em;
     background: transparent;
     border: none;
@@ -55,6 +56,10 @@ input,textarea{
     margin: 1em;
     width: 60%;
 }
+
+
+
+
 
 @media only screen and (max-device-width:420px){
     *{
@@ -89,6 +94,7 @@ nav{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    border: 1px solid #707070
 }
 
 main{
@@ -110,6 +116,11 @@ a{
 li i{
     font-size: 1.5em;
 }
+
+h1{
+    color: white;
+}
+
 
 .button{
     border: 1px solid var(--unnamed-color-ffffff);
@@ -139,7 +150,7 @@ li{
     margin-bottom: 1em;
 }
 
-li:last-child{
+li:not(.unnStyled):last-child{
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -162,17 +173,17 @@ header {
     justify-content: space-between;
     padding: 1em 2em;
     border-bottom: 1px solid gray;
+    background: #231F1F 0% 0% no-repeat padding-box;;
 }
 
 .add-project{
     background: #333F4A 0% 0% no-repeat padding-box;
     box-shadow: 0px 3px 6px #00000029;
     border: 1px solid #707070;
-    border-radius: 1.5em;
     color: white;
     letter-spacing: 0.1em;
     text-align: center;
-    width: 20%;
+    width: 20vw;
 }
 
 .add-project > i{
@@ -181,16 +192,15 @@ header {
 }
 
 .search-bar{
-    width: 70%;
+    width: 20vw;
 }
 
 .search-bar>input{
     background: #333F4A 0% 0% no-repeat padding-box;
     box-shadow: 0px 3px 6px #00000029;
     border: 1px solid #707070;
-    border-radius: 25px;
-    width: 100%;
     text-align: center;
+    width: 70%;
     color: gray;
     margin: 0;
     box-sizing: border-box;
@@ -201,4 +211,20 @@ header {
     border-radius: 1em;
     box-shadow: 0 0 0.2em red;
     outline: none;
+}
+
+.drop-down-bar{
+    background: #333F4A 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border: 1px solid #707070;
+    text-align: center;
+    color: gray;
+    width: 20vw;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.input-search-bar{
+    height: 100%;
+    width: 25vw;
 }

@@ -16,7 +16,7 @@
         <img src="public/img/logo.svg">
         <ul>
             <li>
-                <a href="#" class="button">main page</a>
+                <a href="main" class="button">main page</a>
                 <i class="far fa-building"></i>
             </li>
             <li>
@@ -28,7 +28,7 @@
                 <i class="fas fa-users"></i>
             </li>
             <li>
-                <a href="#" class="button">log out</a>
+                <a href="logout" class="button" name="logout">log out</a>
                 <i class="fas fa-door-open"></i>
             </li>
         </ul>

@@ -2,7 +2,9 @@
 
 require_once 'AppController.php';
 require_once __DIR__ . '/../models/Project.php';
+require_once __DIR__ . '/../models/Article.php';
 require_once __DIR__ . '/../repository/ProjectRepository.php';
+require_once __DIR__ . '/../repository/ArticleRepository.php';
 
 class ProjectController extends AppController
 {
@@ -22,12 +24,26 @@ class ProjectController extends AppController
 
     public function projects()
     {
+        $this->come();
         $projects = $this->projectRepository->getProjects();
         $this->render('projects', ['projects' => $projects]);
     }
 
+    public function main(){
+        $this->come();
+        $projects=$this->projectRepository->getAllArticles();
+        $this->render('categories',['projects' =>$projects ]);
+    }
+
+    public function category($id){
+        $this->come();
+        $projects=$this->projectRepository->getArticlesForCategory($id);
+        $this->render('categories',['projects' =>$projects ]);
+    }
+
     public function addProject()
     {
+        $this->come();
         if ($this->isPost() && is_uploaded_file($_FILES['file']['tmp_name']) && $this->validate($_FILES['file'])) {
             move_uploaded_file(
                 $_FILES['file']['tmp_name'],

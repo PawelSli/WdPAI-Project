@@ -2,9 +2,59 @@
 
 require_once 'Repository.php';
 require_once __DIR__.'/../models/Project.php';
+require_once __DIR__.'/../models/Slide.php';
+require_once __DIR__.'/../models/Article.php';
 
 class ProjectRepository extends Repository
 {
+    public function getAllArticles():array
+    {
+        $result = [];
+        $stmt=$this->database->connect()->prepare('
+            SELECT * FROM public.articles
+        ');
+        $stmt->execute();
+        $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($articles as $article) {
+            $result[] = new Article(
+                $article['title'],
+                $article['image'],
+                $article['description'],
+                $article['id_assigned_by'],
+                $article['article_category'],
+                $article['like'],
+                $article['dislike']
+            );
+        }
+        return $result;
+    }
+
+    public function getArticlesForCategory(string $article_id): array
+    {
+        $result = [];
+        $article_id =strtolower($article_id);
+        $stmt = $this->database->connect()->prepare('
+           SELECT articles.title, articles.image,articles.description,articles.id_assigned_by,
+           articles.like,articles.dislike
+            from articles inner join categories on articles.article_category = categories.id
+            WHERE lower(public.categories.name) = :article_id
+        ');
+        $stmt->bindParam(':article_id', $article_id, PDO::PARAM_STR);
+        $stmt->execute();
+        $articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($articles as $article) {
+            $result[] = new Article(
+                $article['title'],
+                $article['image'],
+                $article['description'],
+                $article['id_assigned_by'],
+                $article['article_category'],
+                $article['like'],
+                $article['dislike']
+            );
+        }
+        return $result;
+    }
 
     public function getProject(int $id): ?Project
     {
