@@ -9,7 +9,9 @@ class UserRepository extends Repository
     public function getUser(string $email): ?User
     {
         $stmt = $this->database->connect()->prepare('
-            SELECT * FROM public.users WHERE email = :email
+            SELECT users.email,users.password,user_details.name,user_details.surname
+            FROM public.users inner join user_details on users.id_user_details = user_details.id
+            WHERE users.email = :email
         ');
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
@@ -30,6 +32,7 @@ class UserRepository extends Repository
 
     public function addUser(User $user)
     {
+        $date = new DateTime();
         $stmt = $this->database->connect()->prepare('
             INSERT INTO user_details (name, surname, phone)
             VALUES (?, ?, ?)
@@ -42,14 +45,14 @@ class UserRepository extends Repository
         ]);
 
         $stmt = $this->database->connect()->prepare('
-            INSERT INTO public.users (email, password, id_user_details)
-            VALUES (?, ?, ?)
+            INSERT INTO public.users (email, password, id_user_details, created_at)
+            VALUES (?, ?, ?, ?)
         ');
-
         $stmt->execute([
             $user->getEmail(),
-            $user->getPassword(),
-            $this->getUserDetailsId($user)
+            password_hash($user->getPassword(),PASSWORD_BCRYPT),
+            $this->getUserDetailsId($user),
+            $date->format('Y-m-d')
         ]);
     }
 
@@ -58,9 +61,12 @@ class UserRepository extends Repository
         $stmt = $this->database->connect()->prepare('
             SELECT * FROM user_details WHERE name = :name AND surname = :surname AND phone = :phone
         ');
-        $stmt->bindParam(':name', $user->getName(), PDO::PARAM_STR);
-        $stmt->bindParam(':surname', $user->getSurname(), PDO::PARAM_STR);
-        $stmt->bindParam(':phone', $user->getPhone(), PDO::PARAM_STR);
+        $name = $user->getName();
+        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+        $surname = $user->getSurname();
+        $stmt->bindParam(':surname', $surname, PDO::PARAM_STR);
+        $phone = $user->getPhone();
+        $stmt->bindParam(':phone', $phone, PDO::PARAM_STR);
         $stmt->execute();
 
         $data = $stmt->fetch(PDO::FETCH_ASSOC);

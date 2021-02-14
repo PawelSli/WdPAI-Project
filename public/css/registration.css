@@ -1,0 +1,19 @@
+
+.container{
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.logo{
+    align-self: flex-start;
+    margin-top: 5%;
+}
+
+img{
+    width: 30vh;
+}
+
+.login-container {
+    width: 50vw;
+    height: 80%;
+}

@@ -25,10 +25,8 @@ class SecurityController extends AppController {
         }
 
         $email = $_POST['email'];
-        $password = $_POST['password'];
-
+        $password = $_POST["password"];
         $user = $userRepository->getUser($email);
-
         if(!$user){
             return $this->render('login', ['messages' => ['User '.$email.' not exist!']]);
         }
@@ -37,12 +35,18 @@ class SecurityController extends AppController {
             return $this->render('login', ['messages' => ['User with this email not exist!']]);
         }
 
-        if ($user->getPassword() !== $password) {
+        if (!isset($_COOKIE['anon'])&&!password_verify($password,$user->getPassword())) {
             return $this->render('login', ['messages' => ['Wrong password!']]);
         }
-
+        session_start();
+        if(!isset($_COOKIE['anon'])){
+            $cookie=$user->getEmail();
+            setcookie('anon',$cookie,time()+3600*24);
+        }
+        $_SESSION['user_email']=$user->getEmail();
+        $_SESSION['user_name']=$user->getName();
         $url = "http://$_SERVER[HTTP_HOST]";
-        header("Location: {$url}/projects");
+        header("Location: {$url}/main");
     }
 
     public function register()
@@ -63,7 +67,7 @@ class SecurityController extends AppController {
         }
 
         //TODO try to use better hash function
-        $user = new User($email, md5($password), $name, $surname);
+        $user = new User($email, $password, $name, $surname);
         $user->setPhone($phone);
 
         $this->userRepository->addUser($user);

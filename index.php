@@ -14,6 +14,11 @@ Router::post('search', 'ProjectController');
 Router::get('like', 'ProjectController');
 Router::get('dislike', 'ProjectController');
 Router::get('slideshow', 'SlideshowController');
+Router::get('addArticle', 'SlideshowController');
+Router::get('category', 'ProjectController');
+Router::get('main', 'ProjectController');
+Router::get('logout', 'AppController');
+Router::post('showProfile','UserController');
 
 
 

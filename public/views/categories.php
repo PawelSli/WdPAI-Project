@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="public/css/style.css">
-    <link rel="stylesheet" type="text/css" href="public/css/projects.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/projects.css">
 
     <script src="https://kit.fontawesome.com/723297a893.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="./public/js/search.js" defer></script>
-    <script type="text/javascript" src="./public/js/statistics.js" defer></script>
+    <script type="text/javascript" src="/public/js/search.js" defer></script>
+    <script type="text/javascript" src="/public/js/statistics.js" defer></script>
     <title>PROJECTS</title>
 </head>
 
 <body>
 <div class="base-container">
     <nav>
-        <img src="public/img/logo.svg">
+        <img src="/public/img/logo.svg">
         <ul>
             <li>
                 <a href="main" class="button">main page</a>
@@ -28,7 +28,7 @@
                 <i class="fas fa-users"></i>
             </li>
             <li>
-                <a href="logout" class="button" name="logout">log out</a>
+                <a href="<?= $url."/logout"; ?>" class="button" name="logout">log out</a>
                 <i class="fas fa-door-open"></i>
             </li>
         </ul>
@@ -43,11 +43,13 @@
             </div>
         </header>
         <section class="projects">
-            <?php foreach ($projects as $project): ?>
+            <?php
+            $url = "http://$_SERVER[HTTP_HOST]";
+            foreach ($projects as $project): ?>
                 <div id="<?= $project->getId(); ?>">
-                    <img src="public/uploads/<?= $project->getImage(); ?>">
+                    <img src="/public/uploads/<?= $project->getImage(); ?>">
                     <div>
-                        <h2><?= $project->getTitle(); ?></h2>
+                        <a href="<?= $url."/slideshow/".$project->getTitle(); ?>" ><h2><?= $project->getTitle(); ?></h2></a>
                         <p><?= $project->getDescription(); ?></p>
                         <div class="social-section">
                             <i class="fas fa-heart"> <?= $project->getLike(); ?></i>
